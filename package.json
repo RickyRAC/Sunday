@@ -1,7 +1,7 @@
 {
-  "name": "express-authentication",
+  "name": "To-Do-List",
   "version": "1.0.0",
-  "description": "This is express authentication",
+  "description": "To-Do-List",
   "main": "server.js",
   "directories": {
     "test": "test"
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/romebell/express-authentication.git"
+    "url": "https://github.com/RickyRAC/Sunday"
   },
   "author": "Ricky Crawford",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/romebell/express-authentication/issues"
+    "url": "https://github.com/RickyRAC/Sunday"
   },
-  "homepage": "https://github.com/romebell/express-authentication#readme",
+  "homepage": "https://github.com/RickyRAC/Sunday",
   "dependencies": {
     "axios": "^0.21.0",
     "bcrypt": "^5.0.0",
