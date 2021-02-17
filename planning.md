@@ -10,3 +10,7 @@ Wiresframe:
 ![sharelink](./sharelinkpage.png)
 
 ![logout](./login.png)
+
+ERD:
+
+https://dbdiagram.io/d/602c7e8880d742080a3acd0c
