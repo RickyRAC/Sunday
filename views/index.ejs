@@ -1,1 +1,21 @@
-<h2>Homepage</h2>
+
+<h2>User</h2>
+<form method="GET" action="/user">
+    <label for="nameFilter">Filter by Name</label>
+    <input id="nameFilter" type="text" name="nameFilter">
+    <input type="submit">
+</form>
+
+<ul>
+    <% for (let i = 0; i < user.length; i++) { %> 
+        <% let user = user[i] %>
+        <p><%= user.name %></p>
+        <p><%= user.type %></p>
+        <form method="POST" action="/user/<%= idx %>?_method=DELETE">
+            <input type="submit" value='Delete'>
+        </form>
+        <a href="/user/<%= i %>">Update</a>
+    <% } %>
+
+    <%= user[0].name %>
+</ul>
