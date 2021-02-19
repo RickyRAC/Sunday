@@ -49,16 +49,53 @@ app.use('/auth', require('./controllers/auth'));
 app.get('/', (req, res) => {
   res.render('index');
 });
-app.get('/', (req, res) => {
-  res.render('index');
-});
+
 
 app.get('/profile', isLoggedIn, (req, res) => {
-  const { id, name, email } = req.user.get(); 
-  res.render('profile', { id, name, email });
+  const { id, name, email } = req.user.get();
+  req.user.getLists().then(function(lists) {
+   res.render('profile', { id, name, email, lists });  
+  }); 
+  
 });
 
-app.get
+app.post('/list', (req, res) => {
+  console.log(req.body)
+  console.log(req.user)
+  req.user.createList({
+    title: req.body.title 
+  }).then(function(list) {
+    console.log(list.title);
+    res.redirect('/profile')
+  });
+})
+
+app.get('/list', (req, res) => {
+  // route needs to query the db to get all lists by current user
+  // const { id, name } = req.list.get();
+  // req.list.getLists().then(function(lists) {
+   res.render('list');  
+  }); 
+  
+//});
+
+app.post('/profile/list', (req, res) => {
+  console.log(req.body)
+  console.log(req.user)
+  req.list.createList({
+    name: req.body.name 
+  }).then(function(list) {
+    console.log(list.name);
+    res.redirect('/profile/list')
+  });
+})
+
+
+
+
+
+
+
 
 
 

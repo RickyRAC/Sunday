@@ -1,7 +1,29 @@
 <h2>Profile Page</h2>
 
-<h3>Welcome to your PROFILE</h3>
+<h3>Welcome to your PROFILE, <%= name %></h3>
 
-<p>Id: <%= id %></p>
-<p>Name: <%= name %></p>
-<p>Email: <%= email %></p>
+<!-- create lists -->
+<!-- create items on list -->
+<!-- view other lists -->
+<!-- share button -->
+
+<form method="POST" action="/list">
+    <label for="title">New List</label>
+    <input id="title" type="text" name="title">
+  
+  
+    <input type="submit">
+</form>
+
+<% for (let i= 0; i< lists.length; i++) { %>
+  <div><h1><%=lists[i].title %></h1></div>  
+  <% } %>
+
+  
+
+ <form action="/list">
+    <input type="submit" value="Go to List" />
+</form>
+
+
+  

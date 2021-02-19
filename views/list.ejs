@@ -1,0 +1,21 @@
+<h1 class='text-lg-center'><%= list.name %>'s ''</h1>
+<div class="card" style="width: 18rem;">
+    <ul class="list-group list-group-flush">
+      <% for (let i=0; i< list.name.length; i++) { %>
+        <li class="list-group-item"><%= list.name[i].name %></li>
+      <% } %>
+    </ul>
+</div>
+<form action='/list/<%= list.id %>/additem' method='POST'>
+    <div class="mb-3">
+      <label for="name" class="form-label">item name</label>
+      <input type="text" class="form-control" id="name" aria-describedby="emailHelp" name='name'>
+      <div class="form-text">Create a new list.</div>
+    </div>
+    <div class="mb-3">
+        <label for="item" class="form-s">Items</label>
+        <input type="text" class="form-control" id="species" aria-describedby="emailHelp" name='species'>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
