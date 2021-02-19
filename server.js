@@ -12,6 +12,7 @@ app.set('view engine', 'ejs');
 // Session 
 const SECRET_SESSION = process.env.SECRET_SESSION;
 const isLoggedIn = require('./middleware/isLoggedIn');
+const db = require('./models');
 
 // MIDDLEWARE
 app.use(require('morgan')('dev'));
@@ -68,17 +69,22 @@ app.post('/list', (req, res) => {
     console.log(list.title);
     res.redirect('/profile')
   });
-})
+});
 
-app.get('/list', (req, res) => {
+app.get('/lists/:id', (req, res) => {
   // route needs to query the db to get all lists by current user
   // const { id, name } = req.list.get();
   // req.list.getLists().then(function(lists) {
-   res.render('list');  
-  }); 
-  
-//});
+  const id = req.params.id
+  //db.list.findOne()
+  db.list.findByPk(id).then(function(foundList) {
+    console.log(foundList.data);
+    res.render('single', {foundList})
+    //res.send("myTemplate", {user: foundUser);
+  });
 
+});
+     
 app.post('/profile/list', (req, res) => {
   console.log(req.body)
   console.log(req.user)
@@ -90,7 +96,19 @@ app.post('/profile/list', (req, res) => {
   });
 })
 
+app.post('/lists/:id', (req, res) => {
+  console.log(req.body)
+  console.log(req.list)
+  req.item.createItem({
+    name:req.body.name
+  }).then(function(item){
+    console.log(list.name);
+    res.redirect('/list/:id')
+  })
 
+})
+
+ 
 
 
 
