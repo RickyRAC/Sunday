@@ -1,6 +1,6 @@
 <h1><%= foundList.get().title%></h1>
 
-<form method="POST" action="/item">
+<form method="POST" action="/lists/<%= id %>">
     <label for="title">New Item</label>
     <input id="title" type="text" name="title">
   
@@ -8,3 +8,6 @@
     <input type="submit">
 
 </form>
+
+
+

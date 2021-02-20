@@ -4,6 +4,8 @@ const layouts = require('express-ejs-layouts');
 const session = require('express-session');
 const passport = require('./config/ppConfig'); //
 const flash = require('connect-flash');
+const methodOverride = require('method-override');
+
 
 
 const app = express();
@@ -15,6 +17,7 @@ const isLoggedIn = require('./middleware/isLoggedIn');
 const db = require('./models');
 
 // MIDDLEWARE
+app.use(methodOverride('_method'));
 app.use(require('morgan')('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
@@ -79,7 +82,7 @@ app.get('/lists/:id', (req, res) => {
   //db.list.findOne()
   db.list.findByPk(id).then(function(foundList) {
     console.log(foundList.data);
-    res.render('single', {foundList})
+    res.render('single', {foundList, id})
     //res.send("myTemplate", {user: foundUser);
   });
 
@@ -97,25 +100,18 @@ app.post('/profile/list', (req, res) => {
 })
 
 app.post('/lists/:id', (req, res) => {
+  console.log('Here is req.body')
   console.log(req.body)
-  console.log(req.list)
-  req.item.createItem({
-    name:req.body.name
+  db.item.create({
+    item:req.body.title
   }).then(function(item){
-    console.log(list.name);
+    console.log(item.item);
     res.redirect('/list/:id')
   })
 
 })
 
  
-
-
-
-
-
-
-
 
 
 
