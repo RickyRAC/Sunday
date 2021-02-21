@@ -1,0 +1,6 @@
+<% for (let i= 0; i< foundList.length; i++) { %>
+    <p><%= foundList.items[0].item %></p>   
+    <a href="/single/<%= foundList[i].id%>"><%=foundList[i].title %></a> 
+    <% } %>
+
+    <div><h1><%=lists[i].title %></h1></div> 

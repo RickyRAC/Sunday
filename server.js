@@ -22,6 +22,7 @@ app.use(require('morgan')('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
 app.use(layouts);
+app.use('/lists', require('./controllers/list'));
 
 // Session Middleware
 
@@ -74,18 +75,28 @@ app.post('/list', (req, res) => {
   });
 });
 
+//SHOW Route
 app.get('/lists/:id', (req, res) => {
-  // route needs to query the db to get all lists by current user
-  // const { id, name } = req.list.get();
-  // req.list.getLists().then(function(lists) {
   const id = req.params.id
+  console.log("Here is id and I'm hitting the show route!")
+  console.log(id)
   //db.list.findOne()
-  db.list.findByPk(id).then(function(foundList) {
-    console.log(foundList.data);
-    res.render('single', {foundList, id})
-    //res.send("myTemplate", {user: foundUser);
+  db.list.findOne({
+    //I know that list has a column for the id,
+    //so I am saying "where the list's id is the value of req.params.id"
+    where: { id: id },
+    //Now that the POST route in the controllers' list.js successfully creates an item
+    //and it's associated with a list, let's include an array of all the items
+    //that belong to this list!
+    include: [db.item]
+  }).then(function(foundList) {
+    let items = foundList.dataValues.items
+    //console.log(items)
+    //Let's make sure that we can grab the item's name!
+   // console.log("Here is foundlist.dataValues.items[0].item:")
+    console.log("foundList!!!!!", foundList.list.dataValues.items);
+    res.render('single', {foundList, id, items: items})
   });
-
 });
      
 app.post('/profile/list', (req, res) => {
@@ -99,21 +110,13 @@ app.post('/profile/list', (req, res) => {
   });
 })
 
-app.post('/lists/:id', (req, res) => {
-  console.log('Here is req.body')
-  console.log(req.body)
-  db.item.create({
-    item:req.body.title
-  }).then(function(item){
-    console.log(item.item);
-    res.redirect('/list/:id')
-  })
-
-})
-
- 
-
-
+app.get('/singleItem', (req, res) => {
+  const { id, name } = req.item.get();
+  req.item.getItem().then(function(item) {
+   res.render('singleItem', { id, name });  
+  }); 
+  
+});
 
 
 

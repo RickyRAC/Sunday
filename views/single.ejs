@@ -1,13 +1,22 @@
 <h1><%= foundList.get().title%></h1>
-
+ <% for (let i = 0; i <= foundList.dataValues.items.length; i++){ %>
+ <%=foundList.dataValues.items[i] %>
+ <% } %>
 <form method="POST" action="/lists/<%= id %>">
     <label for="title">New Item</label>
     <input id="title" type="text" name="title">
-  
+    
   
     <input type="submit">
 
 </form>
+
+  
+    
+  
+   <form action="/single">
+      <input type="submit" value="Go to item" />
+  </form>
 
 
 
