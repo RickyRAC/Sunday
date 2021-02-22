@@ -15,6 +15,7 @@ app.set('view engine', 'ejs');
 const SECRET_SESSION = process.env.SECRET_SESSION;
 const isLoggedIn = require('./middleware/isLoggedIn');
 const db = require('./models');
+const item = require('./models/item');
 
 // MIDDLEWARE
 app.use(methodOverride('_method'));
@@ -94,7 +95,6 @@ app.get('/lists/:id', (req, res) => {
     //console.log(items)
     //Let's make sure that we can grab the item's name!
    // console.log("Here is foundlist.dataValues.items[0].item:")
-    console.log("foundList!!!!!", foundList.list.dataValues.items);
     res.render('single', {foundList, id, items: items})
   });
 });
@@ -117,6 +117,21 @@ app.get('/singleItem', (req, res) => {
   }); 
   
 });
+
+// app.delete('/single', (req, res)=> {
+//   const items = fs.readFileSync('/single')
+//   item[i].splice(req.params, 1)
+//   fs.writeFileSync('/single')
+//   res.redirect('/single')
+// })
+
+// app.put('/profile', (req,res) => {
+//   const foundList = fs.readFileSync('/profile')
+//   lists.[req.params].name = req.body.name
+//   lists.[req.params].type = req.body.type
+//   fs.writeFileSync('/profile')
+//   res.redirect('/profile')
+// })
 
 
 

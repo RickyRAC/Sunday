@@ -1,7 +1,14 @@
 <h1><%= foundList.get().title%></h1>
- <% for (let i = 0; i <= foundList.dataValues.items.length; i++){ %>
- <%=foundList.dataValues.items[i] %>
- <% } %>
+<form method ="POST" action="/lists/<%=id %>/?_method=PUT">
+    <label for="title">New Name</label>
+    <input id='title' type='text' name='newTitle'>
+    <input type= "submit">
+</form>
+ <% items.map(item => { %>
+    <ul>
+ <li><%=item.item %></li>
+</ul>
+ <% }) %>
 <form method="POST" action="/lists/<%= id %>">
     <label for="title">New Item</label>
     <input id="title" type="text" name="title">
@@ -10,6 +17,13 @@
     <input type="submit">
 
 </form>
+
+<!-- <form method="POST" action="/single//?_method=DELETE">
+    <input type="submit" value="Delete">
+</form> -->
+
+
+
 
   
     

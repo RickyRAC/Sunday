@@ -33,4 +33,23 @@ router.post('/:id', (req, res) => {
     res.redirect(`/lists/${id}`)
   })
 })
+
+router.put('/:id', (req,res) => {
+  db.list.update({
+    title: req.body.newTitle
+  },{
+    where: {
+      id: req.params.id
+    }
+  }).then(updatedTitle => {
+    res.redirect(`/lists/${id}`)
+  })
+  //const foundList = fs.readFileSync('/:id')
+  // lists.[req.params].name = req.body.name
+  // lists.[req.params].type = req.body.type
+  // fs.writeFileSync('/profile')
+  // res.redirect('/profile')
+})
+
+
 module.exports = router
