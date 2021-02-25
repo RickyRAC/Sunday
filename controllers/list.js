@@ -42,7 +42,7 @@ router.put('/:id', (req,res) => {
       id: req.params.id
     }
   }).then(updatedTitle => {
-    res.redirect(`/lists/${id}`)
+    res.redirect(`/lists/${req.params.id}`)
   })
   //const foundList = fs.readFileSync('/:id')
   // lists.[req.params].name = req.body.name
@@ -50,6 +50,25 @@ router.put('/:id', (req,res) => {
   // fs.writeFileSync('/profile')
   // res.redirect('/profile')
 })
+
+router.delete('/:id', (req, res) =>{
+  db.item.findOne({
+    where: {
+      id: req.params.id
+    }
+  }).then((item)=> {
+    item.destroy()}).then(() => {
+      res.redirect(`/profile`)
+    
+
+  }).catch(err => {
+    console.log(err)
+  })
+})
+
+
+  
+
 
 
 module.exports = router
