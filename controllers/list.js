@@ -58,7 +58,7 @@ router.delete('/:id', (req, res) =>{
     }
   }).then((item)=> {
     item.destroy()}).then(() => {
-      res.redirect(`/profile`)
+      res.redirect(`back`)
     
 
   }).catch(err => {
